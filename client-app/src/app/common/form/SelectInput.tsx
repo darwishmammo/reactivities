@@ -1,9 +1,9 @@
-import React from 'react';
-import { FieldRenderProps } from 'react-final-form';
-import { FormFieldProps, Form, Label, Select } from 'semantic-ui-react';
+import React from "react";
+import { FieldRenderProps } from "react-final-form";
+import { FormFieldProps, Form, Label, Select } from "semantic-ui-react";
 
 interface IProps
-  extends FieldRenderProps<string, HTMLElement>,
+  extends FieldRenderProps<string, HTMLSelectElement>,
     FormFieldProps {}
 
 const SelectInput: React.FC<IProps> = ({
@@ -11,7 +11,7 @@ const SelectInput: React.FC<IProps> = ({
   width,
   options,
   placeholder,
-  meta: { touched, error }
+  meta: { touched, error },
 }) => {
   return (
     <Form.Field error={touched && !!error} width={width}>
@@ -22,7 +22,7 @@ const SelectInput: React.FC<IProps> = ({
         options={options}
       />
       {touched && error && (
-        <Label basic color='red'>
+        <Label basic color="red">
           {error}
         </Label>
       )}
