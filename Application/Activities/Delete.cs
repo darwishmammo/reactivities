@@ -26,12 +26,18 @@ namespace Application.Activities
             public async Task<Unit> Handle(Command request, CancellationToken cancellationToken)
             {
                 var activity = await _context.Activities.FindAsync(request.Id);
-                if (activity == null) throw new RestException(HttpStatusCode.NotFound, new { activity = "Not found" });
-                _context.Remove(activity);
-                var success = await _context.SaveChangesAsync() > 0;
-                if (success) return Unit.Value;
-                throw new Exception("Problem saving changes");
 
+                if (activity == null)
+                    throw new RestException(HttpStatusCode.NotFound, new { Activity = "Not found" });
+
+
+                _context.Remove(activity);
+
+                var success = await _context.SaveChangesAsync() > 0;
+
+                if (success) return Unit.Value;
+
+                throw new Exception("Problem saving changes");
             }
         }
     }

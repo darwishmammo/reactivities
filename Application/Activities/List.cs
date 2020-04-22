@@ -10,7 +10,7 @@ namespace Application.Activities
 {
     public class List
     {
-        public class Query : IRequest<List<Activity>> { };
+        public class Query : IRequest<List<Activity>> { }
 
         public class Handler : IRequestHandler<Query, List<Activity>>
         {
@@ -23,9 +23,9 @@ namespace Application.Activities
             public async Task<List<Activity>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var activities = await _context.Activities.ToListAsync();
+
                 return activities;
             }
         }
-
     }
 }

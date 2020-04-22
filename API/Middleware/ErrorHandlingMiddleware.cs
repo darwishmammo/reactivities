@@ -1,10 +1,10 @@
 using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Application.Errors;
 using System.Net;
 using System.Text.Json;
+using System.Threading.Tasks;
+using Application.Errors;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace API.Middleware
 {
@@ -23,17 +23,17 @@ namespace API.Middleware
             try
             {
                 await _next(context);
-            }
+            } 
             catch (Exception ex)
             {
                 await HandleExceptionAsync(context, ex, _logger);
             }
-
         }
 
         private async Task HandleExceptionAsync(HttpContext context, Exception ex, ILogger<ErrorHandlingMiddleware> logger)
         {
             object errors = null;
+
             switch (ex)
             {
                 case RestException re:
@@ -46,13 +46,12 @@ namespace API.Middleware
                     errors = string.IsNullOrWhiteSpace(e.Message) ? "Error" : e.Message;
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     break;
-
             }
 
             context.Response.ContentType = "application/json";
             if (errors != null)
             {
-                var result = JsonSerializer.Serialize(new
+                var result = JsonSerializer.Serialize(new 
                 {
                     errors
                 });
